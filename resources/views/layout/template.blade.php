@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <script src="https://kit.fontawesome.com/e466ec6b27.js" crossorigin="anonymous"></script>
     <!-- Font-icon css-->
-    <link rel="stylesheet" type="text/css"
-        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    {{-- <link rel="stylesheet" type="text/css"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> --}}
     <title>Document</title>
 </head>
 
@@ -112,6 +113,41 @@
             </div>
         </div>
         <ul class="app-menu">
+            <li><a class="app-menu__item" href="home"><i
+                        class="app-menu__icon fa fa-home"></i><span class="app-menu__label">Home</span></a></li>
+
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                        class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Productos</span><i
+                        class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="ui-cards.html"><i class="icon fa fa-list"></i>Listar</a></li>
+                    <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-shipping-fast"></i>Realizar Pedido</a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                        class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Proveedores</span><i
+                        class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="ui-cards.html"><i class="icon fa fa-list"></i>Listar</a></li>
+                    <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-user-plus"></i>Agregar</a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li class="treeview"><a class="app-menu__item" href="{{-- {{ route('recepcion') }} --}}" data-toggle="treeview"><i
+                        class="app-menu__icon fa fa-box"></i><span class="app-menu__label">Recepción</span><i
+                        class="treeview-indicator fa fa-angle-right"></i></a>
+
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="ui-cards.html"><i class="icon fa fa-list"></i>Listar</a></li>
+                    <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-dolly"></i>Recepcionar Producto</a>
+                    </li>
+                </ul>
+            </li>
+
+
             <li><a class="app-menu__item" href="dashboard.html"><i class="app-menu__icon fa fa-dashboard"></i><span
                         class="app-menu__label">Dashboard</span></a></li>
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
