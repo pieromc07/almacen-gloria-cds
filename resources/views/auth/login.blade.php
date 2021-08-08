@@ -6,15 +6,16 @@
             <h1>Vali</h1>
         </div>
         <div class="login-box">
-            <form class="login-form" action="index.html">
+            <form class="login-form" action="{{ route('login') }}" method="POST">
+                @csrf
                 <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
                 <div class="form-group">
                     <label class="control-label">USERNAME</label>
-                    <input class="form-control" type="text" placeholder="Username" autofocus>
+                    <input class="form-control" type="text" placeholder="Username" autofocus name="username">
                 </div>
                 <div class="form-group">
                     <label class="control-label">PASSWORD</label>
-                    <input class="form-control" type="password" placeholder="Password">
+                    <input class="form-control" type="password" placeholder="Password"  name="password">
                 </div>
                 <div class="form-group">
                     <div class="utility">
@@ -27,7 +28,7 @@
                     </div>
                 </div>
                 <div class="form-group btn-container">
-                    <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
+                    <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
                 </div>
             </form>
             <form class="forget-form" action="index.html">
