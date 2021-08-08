@@ -120,8 +120,8 @@
                         class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Productos</span><i
                         class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="ui-cards.html"><i class="icon fa fa-list"></i>Listar</a></li>
-                    <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-shipping-fast"></i>Realizar Pedido</a>
+                    <li><a class="treeview-item" href="{{ route('list') }}"><i class="icon fa fa-list"></i>Listar</a></li>
+                    <li><a class="treeview-item" href="{{ route('order') }}"><i class="icon fa fa-shipping-fast"></i>Realizar Pedido</a>
                     </li>
                 </ul>
             </li>
@@ -136,7 +136,7 @@
                 </ul>
             </li>
             
-            <li class="treeview"><a class="app-menu__item" href="{{-- {{ route('recepcion') }} --}}" data-toggle="treeview"><i
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                         class="app-menu__icon fa fa-box"></i><span class="app-menu__label">Recepción</span><i
                         class="treeview-indicator fa fa-angle-right"></i></a>
 
@@ -244,6 +244,7 @@
     <!-- The javascript plugin to display page loading on top-->
     <script src="/js/plugins/pace.min.js"></script>
     <!-- Page specific javascripts-->
+    @yield('script')
     <!-- Google analytics script-->
     <script type="text/javascript">
         if (document.location.hostname == 'pratikborsadiya.in') {
@@ -262,7 +263,6 @@
             ga('send', 'pageview');
         }
     </script>
-    @yield('script')
 </body>
 
 </html>
