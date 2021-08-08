@@ -1,0 +1,19 @@
+.options-list{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.options-list .edit i{
+
+    font-size: 18px;
+    color: #28a745;
+}
+.options-list form button{
+    border: none;
+    background: none;
+}
+.options-list form button i{
+    font-size: 18px;
+    color: #dc3545;
+}

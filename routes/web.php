@@ -29,3 +29,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/list',[App\Http\Controllers\ProductController::class, 'index'])->name('list');
 
 Route::get('/order',[App\Http\Controllers\ProductController::class, 'order'])->name('order');
+// Routes Supplier
+Route::get('/supplier',[App\Http\Controllers\SupplierController::class, 'index'])->name('supplier.list');
+Route::get('/supplier/create',[App\Http\Controllers\SupplierController::class, 'create'])->name('supplier.create');
+Route::post('/supplier',[App\Http\Controllers\SupplierController::class, 'store'])->name('supplier.store');
+Route::get('/supplier/edit/{supplier}',[App\Http\Controllers\SupplierController::class, 'edit'])->name('supplier.edit');
+Route::post('/supplier/update/{supplier}',[App\Http\Controllers\SupplierController::class, 'update'])->name('supplier.update');
+Route::get('/supplier/show/{supplier}',[App\Http\Controllers\SupplierController::class, 'show'])->name('supplier.show');
+Route::delete('/supplier{supplier}',[App\Http\Controllers\SupplierController::class, 'destroy'])->name('supplier.destroy');
