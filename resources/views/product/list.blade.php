@@ -7,19 +7,39 @@
                 <tr>
                     <th>#</th>
                     <th>Nombre</th>
+                    <th>Marca</th>
                     <th>Descripción</th>
                     <th>Categoría</th>
+                    <th>Stock</th>
                     <th>Precio unitario</th>
+                    <th>Opciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>01</td>
-                    <td>Spiderman</td>
-                    <td>Juguete de tamaño grande como le gusta a javier</td>
-                    <td>Juguetes</td>
-                    <td>S/.10.00</td>
-                </tr>
+                @foreach ($products as $i => $product)
+                    <tr>
+                        <td>{{$i +1}}</td>
+                        <td>{{$product->name}}</td>
+                        <td>{{$product->brand}}</td>
+                        <td>{{$product->description}}</td>
+                        <td>{{$product->product_categories->category}}</td>
+                        <td>{{$product->stock}}</td>
+                        <td>{{$product->unit_price}}</td>
+                        <td>
+                            <div class="options-list">
+                                <a class="edit" href="{{ route('product.edit', $product) }}">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form method="POST" action="{{ route('product.destroy', $product) }}">
+                                    @csrf
+                                    <input name="_method" type="hidden" value="DELETE">
+                                    <button type="submit"><i class="fas fa-trash"></i></button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+
             </tbody>
         </table>
     </div>
