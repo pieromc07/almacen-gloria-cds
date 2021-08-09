@@ -5,20 +5,20 @@
         <table class="table table-hover table-bordered" id="sampleTable">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Categoría</th>
-                    <th>Precio unitario</th>
+                    <th>CodPedido</th>
+                    <th>Proveedor</th>
+                    <th>Fecha de Orden</th>
+                    <th>Fecha de entrega</th>
+                    <th>Estado</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>01</td>
-                    <td>Spiderman</td>
-                    <td>Juguete de tamaño grande como le gusta a javier</td>
-                    <td>Juguetes</td>
-                    <td>S/.10.00</td>
+                    <td>0001</td>
+                    <td>Alicorp</td>
+                    <td>08/08/2021</td>
+                    <td>13/08/2021</td>
+                    <td>pendiente <a href="#" class="fa fa-plus"> ver mas</a></td>
                 </tr>
             </tbody>
         </table>

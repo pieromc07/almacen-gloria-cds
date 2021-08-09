@@ -113,19 +113,30 @@
             </div>
         </div>
         <ul class="app-menu">
-            <li><a class="app-menu__item" href="home"><i
-                        class="app-menu__icon fa fa-home"></i><span class="app-menu__label">Home</span></a></li>
+            <li><a class="app-menu__item" href="home"><i class="app-menu__icon fa fa-home"></i><span
+                        class="app-menu__label">Home</span></a></li>
 
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                         class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Productos</span><i
                         class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="{{ route('list') }}"><i class="icon fa fa-list"></i>Listar</a></li>
-                    <li><a class="treeview-item" href="{{ route('order') }}"><i class="icon fa fa-shipping-fast"></i>Realizar Pedido</a>
+                    <li><a class="treeview-item" href="#"><i class="icon fa fa-plus"></i>Nuevo</a>
+                    </li>
+                    <li><a class="treeview-item" href="#"><i class="icon fa fa-list"></i>Listar</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                        class="app-menu__icon fa fa-boxes"></i><span class="app-menu__label">Pedidos</span><i
+                        class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="{{ route('order') }}"><i class="icon fa fa-plus"></i>Nuevo</a>
+                    </li>
+                    <li><a class="treeview-item" href="{{ route('list2') }}"><i class="icon fa fa-list"></i>Listar</a>
                     </li>
                 </ul>
             </li>
-            
+
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                         class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Proveedores</span><i
                         class="treeview-indicator fa fa-angle-right"></i></a>
@@ -135,14 +146,15 @@
                     </li>
                 </ul>
             </li>
-            
+
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                         class="app-menu__icon fa fa-box"></i><span class="app-menu__label">Recepción</span><i
                         class="treeview-indicator fa fa-angle-right"></i></a>
 
                 <ul class="treeview-menu">
                     <li><a class="treeview-item" href="ui-cards.html"><i class="icon fa fa-list"></i>Listar</a></li>
-                    <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-dolly"></i>Recepcionar Producto</a>
+                    <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-dolly"></i>Recepcionar
+                            Producto</a>
                     </li>
                 </ul>
             </li>

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -26,6 +25,5 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/list',[App\Http\Controllers\ProductController::class, 'index'])->name('list');
-
-Route::get('/order',[App\Http\Controllers\ProductController::class, 'order'])->name('order');
+Route::get('/list2',[App\Http\Controllers\OrderController::class, 'index'])->name('list2');
+Route::get('/order',[App\Http\Controllers\OrderController::class, 'createo'])->name('order');
