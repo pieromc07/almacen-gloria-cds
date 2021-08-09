@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use App\Models\ProductCategory;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        return view('product.list', compact('products'));
+        return view('order.list');
     }
 
     /**
@@ -27,8 +25,6 @@ class ProductController extends Controller
     public function create()
     {
         //
-        $categories = ProductCategory::all();
-        return view('product.create', compact('categories'));
     }
 
     /**
@@ -40,17 +36,15 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
-        $product = Product::create($request->all());
-        return redirect()->route('product.list');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Order $order)
     {
         //
     }
@@ -58,46 +52,39 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Order $order)
     {
         //
-        $categories = ProductCategory::all();
-        return view('product.edit', compact('product', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Order $order)
     {
         //
-        Product::find($product->id)->update($request->all());
-        return redirect()->route('product.list');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Order $order)
     {
         //
-        Product::find($product->id)->delete();
-        return redirect()->route('product.list');
     }
 
-    public function createp()
+    public function createo()
     {
-        return view('product.create');
+        return view('order.order');
     }
-
 }
