@@ -124,7 +124,6 @@
                     <li><a class="treeview-item" href="{{ route('product.create') }}"><i
                                 class="icon fa fa-user-plus"></i>Agregar</a>
                     </li>
-                    <li><a class="treeview-item" href="#"><i class="icon fa fa-list"></i>Listar</a></li>
                 </ul>
             </li>
 
