@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -39,6 +40,8 @@ Route::get('/supplier/edit/{supplier}',[App\Http\Controllers\SupplierController:
 Route::post('/supplier/update/{supplier}',[App\Http\Controllers\SupplierController::class, 'update'])->name('supplier.update');
 Route::get('/supplier/show/{supplier}',[App\Http\Controllers\SupplierController::class, 'show'])->name('supplier.show');
 Route::delete('/supplier/{supplier}',[App\Http\Controllers\SupplierController::class, 'destroy'])->name('supplier.destroy');
-
-Route::get('/list2',[App\Http\Controllers\OrderController::class, 'index'])->name('list2');
-Route::get('/order',[App\Http\Controllers\OrderController::class, 'createo'])->name('order');
+// Routes Orders
+Route::get('/order/create', [OrderController::class, 'create'])->name('order.create');
+Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+Route::get('/orders',[App\Http\Controllers\OrderController::class, 'index'])->name('order.index');
+// Route::get('/order',[App\Http\Controllers\OrderController::class, 'createo'])->name('order');

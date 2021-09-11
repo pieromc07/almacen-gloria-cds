@@ -9,6 +9,7 @@
                     <th>Nombre de Contacto</th>
                     <th>Telefono</th>
                     <th>Email</th>
+                    <th>Make an order</th>
                     <th>Opciones</th>
                 </tr>
             </thead>
@@ -20,6 +21,12 @@
                         <td>{{ $supplier->contact_name }}</td>
                         <td>{{ $supplier->phone }}</td>
                         <td>{{ $supplier->email }}</td>
+                        <td>
+                            <a href="{{ route('order.create', ['id'=>$supplier->id]) }}">
+                                <i class="fas fa-file"></i>
+                                Order
+                            </a>
+                        </td>
                         <td>
                             <div class="options-list">
                                 <a class="edit" href="{{ route('supplier.edit', $supplier) }}">

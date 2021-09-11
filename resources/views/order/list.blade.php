@@ -13,13 +13,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>0001</td>
-                    <td>Alicorp</td>
-                    <td>08/08/2021</td>
-                    <td>13/08/2021</td>
-                    <td>pendiente <a href="#" class="fa fa-plus"> ver mas</a></td>
-                </tr>
+                @foreach ($orders as $order)
+                    <tr>
+                        <td>{{$order->code}}</td>
+                        <td>{{$order->supplier->business_name}}</td>
+                        <td>{{$order->date_current}}</td>
+                        <td>{{$order->date_required}}</td>
+                        <td>{{$order->status}}</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
