@@ -10,6 +10,7 @@
                     <th>Fecha de Orden</th>
                     <th>Fecha de entrega</th>
                     <th>Estado</th>
+                    <th>Recepcionar</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,6 +21,15 @@
                         <td>{{$order->date_current}}</td>
                         <td>{{$order->date_required}}</td>
                         <td>{{$order->status}}</td>
+                        <td>
+
+                            <a href="{{ route('order.reception', ['id'=> $order->id]) }}">
+
+                                <i class="fas fa-boxes mr-1"></i>
+                                Recepcionar
+                            </a>
+
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

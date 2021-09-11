@@ -6,6 +6,8 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Reception;
+use App\Models\ReceptionDetail;
 use App\Models\Supplier;
 use Dflydev\DotAccessData\Data;
 use GrahamCampbell\ResultType\Result;
@@ -77,7 +79,7 @@ class OrderController extends Controller
             'status' => "PENDIENTE"
         ]);
 
-        for ($i=0; $i < sizeof($products); $i++) {
+        for ($i = 0; $i < sizeof($products); $i++) {
             OrderDetail::create([
                 'order_id' => $order->id,
                 'product_id' => $products[$i],
@@ -85,7 +87,7 @@ class OrderController extends Controller
             ]);
         }
 
-        return redirect()->route('order.index');
+        return redirect()->route('home');
     }
 
     /**
@@ -138,8 +140,33 @@ class OrderController extends Controller
         return view('order.order');
     }
 
-    public function reception()
+    public function reception(Request $request)
     {
-        return view('reception.product');
+        $order = Order::find($request->id);
+        $date = date('Y-m-d');
+        $orderDetails = OrderDetail::all()->where('order_id', $request->id);
+        return view('reception.create', compact('order', 'date', 'orderDetails'));
+    }
+
+    public function receptionCreate(Request $request)
+    {
+        $status = $request->status;
+        $list_quantity = $request->list_quantity;
+        $date_reception = $request->date_reception;
+        $order_id = $request->order_id;
+        $reception = Reception::create([
+            'order_id' => $order_id, 'date_reception' => $date_reception
+        ]);
+        for ($i=0; $i < sizeof($list_quantity); $i++) {
+            ReceptionDetail::create([
+                'reception_id' => $reception->id,
+                'quantity_received' => $list_quantity[$i],
+                'status' => $status[$i]
+            ]);
+        }
+        Order::find($order_id)->update([
+            'status' => "RECIBIDO"
+        ]);
+        return redirect()->route('home');
     }
 }

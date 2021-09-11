@@ -48,3 +48,4 @@ Route::get('/orders',[App\Http\Controllers\OrderController::class, 'index'])->na
 
 //Route Reception
 Route::get('/reception', [OrderController::class, 'reception'])->name('order.reception');
+Route::post('reception', [OrderController::class, 'receptionCreate'])->name('recepcion.create');
