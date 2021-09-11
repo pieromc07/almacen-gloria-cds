@@ -45,3 +45,6 @@ Route::get('/order/create', [OrderController::class, 'create'])->name('order.cre
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 Route::get('/orders',[App\Http\Controllers\OrderController::class, 'index'])->name('order.index');
 // Route::get('/order',[App\Http\Controllers\OrderController::class, 'createo'])->name('order');
+
+//Route Reception
+Route::get('/reception', [OrderController::class, 'reception'])->name('order.reception');

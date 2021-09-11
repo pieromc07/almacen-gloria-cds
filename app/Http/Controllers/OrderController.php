@@ -137,4 +137,9 @@ class OrderController extends Controller
     {
         return view('order.order');
     }
+
+    public function reception()
+    {
+        return view('reception.product');
+    }
 }

@@ -145,7 +145,7 @@
 
                 <ul class="treeview-menu">
                     <li><a class="treeview-item" href="ui-cards.html"><i class="icon fa fa-list"></i>Listar</a></li>
-                    <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-dolly"></i>Recepcionar
+                    <li><a class="treeview-item" href="{{ route('order.reception') }}"><i class="icon fa fa-dolly"></i>Recepcionar
                             Producto</a>
                     </li>
                 </ul>
