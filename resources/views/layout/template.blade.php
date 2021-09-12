@@ -140,14 +140,15 @@
             </li>
 
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
-                        class="app-menu__icon fa fa-box"></i><span class="app-menu__label">Recepción</span><i
+                        class="app-menu__icon fa fa-box"></i><span class="app-menu__label">Almacén</span><i
                         class="treeview-indicator fa fa-angle-right"></i></a>
 
                 <ul class="treeview-menu">
                     <li><a class="treeview-item" href="{{ route('order.index') }}"><i class="icon fa fa-list"></i>Listar Pedidos</a></li>
-                    <li><a class="treeview-item" href="{{ route('order.reception') }}"><i class="icon fa fa-dolly"></i>Recepcionar
+                    <li><a class="treeview-item" href="{{ route('warehouse') }}"><i class="icon fa fa-dolly"></i>Almacenar
                             Producto</a>
                     </li>
+                    <li><a class="treeview-item" href="{{ route('reception.output') }}"><i class="icon fa fa-sign-out"></i>Salida de Producto</a></li>
                 </ul>
             </li>
         </ul>

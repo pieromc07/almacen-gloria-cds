@@ -169,4 +169,12 @@ class OrderController extends Controller
         ]);
         return redirect()->route('home');
     }
+
+    public function receptionOutput(){
+        return view('reception.output');
+    }
+
+    public function warehouse(){
+        return view('reception.warehouse');
+    }
 }
