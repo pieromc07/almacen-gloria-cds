@@ -5,16 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ReceptionDetail extends Model
+class StorageDetail extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['reception_id', 'quantity_received', 'product_id', 'price_unit'];
+    protected $fillable = [
 
-
+        'storage_id','product_id',
+        'lot_number', 'lot_price',
+        'quantity', 'location'
+    ];
 
     public function product()
     {
         return $this->belongsTo('App\Models\Product');
     }
+
 }

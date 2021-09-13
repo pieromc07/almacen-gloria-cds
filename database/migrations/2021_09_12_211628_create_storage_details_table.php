@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReceptionDetailsTable extends Migration
+class CreateStorageDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateReceptionDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reception_details', function (Blueprint $table) {
+        Schema::create('storage_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('reception_id')->constrained();
+            $table->foreignId('storage_id')->constrained();
             $table->foreignId('product_id')->constrained();
-            $table->integer('quantity_received');
-            $table->float('price_unit');
+            $table->string('lot_number');
+            $table->float('lot_price');
+            $table->integer('quantity');
+            $table->string('location');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateReceptionDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reception_details');
+        Schema::dropIfExists('storage_details');
     }
 }

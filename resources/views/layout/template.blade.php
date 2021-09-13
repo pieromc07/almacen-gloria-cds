@@ -145,9 +145,6 @@
 
                 <ul class="treeview-menu">
                     <li><a class="treeview-item" href="{{ route('order.index') }}"><i class="icon fa fa-list"></i>Listar Pedidos</a></li>
-                    <li><a class="treeview-item" href="{{ route('warehouse') }}"><i class="icon fa fa-dolly"></i>Almacenar
-                            Producto</a>
-                    </li>
                     <li><a class="treeview-item" href="{{ route('reception.output') }}"><i class="icon fa fa-sign-out"></i>Salida de Producto</a></li>
                 </ul>
             </li>

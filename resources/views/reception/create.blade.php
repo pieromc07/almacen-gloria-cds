@@ -56,11 +56,9 @@
                             <span id="error" class="alert alert-danger d-none" role="alert"></span>
                         </div>
                         <div class="form-group">
-                            <label for="ruc">Estado del Producto</label>
-                            <select class="form-control" name="" id="status">
-                                <option value="CONFORME">CONFORME</option>
-                                <option value="DESCONFORME">DESCONFORME</option>
-                            </select>
+                            <label for="">Precio Unitario</label>
+                            <input class="form-control" type="number" name="" id="price_unit" min="0.1" step="0.1">
+                            <span id="errorprice" class="alert alert-danger d-none" role="alert"></span>
                         </div>
                         <div class="form-group">
                             <button class="form-control btn btn-primary mt-4" id="add">
@@ -88,7 +86,7 @@
                                         <th>#</th>
                                         <th>Cantidad pedida</th>
                                         <th>Cantidad recibida</th>
-                                        <th>Estado</th>
+                                        <th>Precio unitario</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -124,35 +122,42 @@
                 e.preventDefault();
 
                 if ($('#quantity_received').val()) {
+                    if ($('#price_unit').val()) {
+                        let select = document.getElementById('products');
+                        var values = $("#products").val().split('_');
+                        let indexSelect = document.getElementById('products').selectedIndex;
+                        $('#quantity_order').val(values[1]);
+                        select.removeChild(select[indexSelect]);
 
-                    let select = document.getElementById('products');
-                    var values = $("#products").val().split('_');
-                    let indexSelect = document.getElementById('products').selectedIndex;
-                    $('#quantity_order').val(values[1]);
-                    select.removeChild(select[indexSelect]);
 
+                        let quantity = $('#quantity_received').val();
+                        let prices = $('#price_unit').val();
+                        let row = '<tr id="row' + index +
+                            '"><td><input type="hidden" name="quantity_orders[]" value="' +
+                            values[1] + '"><input type="hidden" name="list_product[]" value="' +
+                            values[0] + '"><input type="hidden" name="prices[]" value="' +
+                            prices + '"><input type="hidden" name="list_quantity[]" value="' + quantity +
+                            '">' + (++index) + '</td><td>' +
+                            values[1] + '</td><td>' + quantity + '</td><td>' + prices + '</td></tr>';
 
-                    let quantity = $('#quantity_received').val();
-                    let status = $('#status').val();
-                    let row = '<tr id="row' + index +
-                        '"><td><input type="hidden" name="quantity_orders[]" value="' +
-                        values[1] + '"><input type="hidden" name="status[]" value="' +
-                        status + '"><input type="hidden" name="list_quantity[]" value="' + quantity +
-                        '">' + (++index) + '</td><td>' +
-                        values[1] + '</td><td>' + quantity + '</td><td>' + status + '</td></tr>';
-
-                    $('#detalle').append(row);
-                    if (!$("#products").val()) {
-                        $('#quantity_order').val(" ");
-                        document.getElementById('products').disabled = true;
-                        document.getElementById('quantity_order').disabled = true;
-                        document.getElementById('quantity_received').disabled = true;
-                        document.getElementById('status').disabled = true
-                        document.getElementById('add').disabled = true
+                        $('#detalle').append(row);
+                        if (!$("#products").val()) {
+                            $('#quantity_order').val(" ");
+                            document.getElementById('products').disabled = true;
+                            document.getElementById('quantity_order').disabled = true;
+                            document.getElementById('quantity_received').disabled = true;
+                            document.getElementById('status').disabled = true
+                            document.getElementById('add').disabled = true
+                        }
+                        $('#error').removeClass('d-block');
+                        $('#errorprice').removeClass('d-block');
+                        values = $("#products").val().split('_');
+                        $('#quantity_order').val(values[1]);
+                    }else{
+                        $('#errorprice').addClass('d-block');
+                    $('#errorprice').html("precio unitario requerido");
                     }
-                    $('#error').removeClass('d-block');
-                    values = $("#products").val().split('_');
-                    $('#quantity_order').val(values[1]);
+
                 } else {
                     $('#error').addClass('d-block');
                     $('#error').html("Cantidad requerida");

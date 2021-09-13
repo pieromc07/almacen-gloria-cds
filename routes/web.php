@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\OrderController;
+use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -44,10 +45,13 @@ Route::delete('/supplier/{supplier}',[App\Http\Controllers\SupplierController::c
 Route::get('/order/create', [OrderController::class, 'create'])->name('order.create');
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 Route::get('/orders',[App\Http\Controllers\OrderController::class, 'index'])->name('order.index');
+Route::get('/order/detail', [App\Http\Controllers\OrderController::class, 'show'] )->name('order.show');
 // Route::get('/order',[App\Http\Controllers\OrderController::class, 'createo'])->name('order');
 
 //Route Reception
 Route::get('/reception', [OrderController::class, 'reception'])->name('order.reception');
 Route::post('reception', [OrderController::class, 'receptionCreate'])->name('recepcion.create');
 Route::get('output', [OrderController::class, 'receptionOutput'])->name('reception.output');
-Route::get('warehouse', [OrderController::class, 'warehouse'])->name('warehouse');
+Route::post('/output/store', [OrderController::class, 'OutputCreate'])->name('output.store');
+Route::get('/warehouse', [OrderController::class, 'warehouse'])->name('warehouse');
+Route::post('/storage/store', [OrderController::class, 'storage'])->name('storage.store');

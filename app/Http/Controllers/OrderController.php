@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Output;
+use App\Models\OutputDetail;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Reception;
 use App\Models\ReceptionDetail;
+use App\Models\Storage;
+use App\Models\StorageDetail;
 use App\Models\Supplier;
 use Dflydev\DotAccessData\Data;
 use GrahamCampbell\ResultType\Result;
@@ -135,10 +139,6 @@ class OrderController extends Controller
         //
     }
 
-    public function createo()
-    {
-        return view('order.order');
-    }
 
     public function reception(Request $request)
     {
@@ -150,18 +150,21 @@ class OrderController extends Controller
 
     public function receptionCreate(Request $request)
     {
-        $status = $request->status;
+        // return $request;
+        $prices = $request->prices;
         $list_quantity = $request->list_quantity;
+        $list_product = $request->list_product;
         $date_reception = $request->date_reception;
         $order_id = $request->order_id;
         $reception = Reception::create([
             'order_id' => $order_id, 'date_reception' => $date_reception
         ]);
-        for ($i=0; $i < sizeof($list_quantity); $i++) {
+        for ($i = 0; $i < sizeof($list_quantity); $i++) {
             ReceptionDetail::create([
                 'reception_id' => $reception->id,
                 'quantity_received' => $list_quantity[$i],
-                'status' => $status[$i]
+                'product_id' => $list_product[$i],
+                'price_unit' => $prices[$i]
             ]);
         }
         Order::find($order_id)->update([
@@ -170,11 +173,163 @@ class OrderController extends Controller
         return redirect()->route('home');
     }
 
-    public function receptionOutput(){
-        return view('reception.output');
+    public function receptionOutput()
+    {
+
+        $products = Product::all();
+        // return $products;
+        return view('reception.output', compact('products'));
     }
 
-    public function warehouse(){
-        return view('reception.warehouse');
+    public function warehouse(Request $request)
+    {
+
+        $reception = Reception::where('order_id', $request->id)->first();
+        $receptionDetails = ReceptionDetail::where('reception_id', $reception->id)->get();
+        $codedate = date('Ym');
+        $codetime = date('his');
+        $day = date('d');
+        $lot_number = "LT" . $codedate . "-" . $day . $codetime;
+        $totalStorage = Storage::all()->count();
+        $codeStorage = "";
+        if ($totalStorage < 10) {
+            $codeStorage = "AL-00000" . ($totalStorage + 1);
+        } else if ($totalStorage < 100) {
+            $codeStorage = "AL-0000" . ($totalStorage + 1);
+        } else if ($totalStorage < 1000) {
+            $codeStorage = "AL000" . ($totalStorage + 1);
+        } else if ($totalStorage < 10000) {
+            $codeStorage = "AL-00" . ($totalStorage + 1);
+        } else if ($totalStorage < 100000) {
+            $codeStorage = "AL-0" . ($totalStorage + 1);
+        }
+
+        // return $lot_number;
+        // return $receptionDetails;
+        return view('reception.warehouse', compact('receptionDetails', 'lot_number', 'codeStorage', 'reception'));
+    }
+
+    public function storage(Request $request)
+    {
+        $list_products = $request->list_products;
+
+        $lot_prices = $request->lot_prices;
+        $list_quantity = $request->list_quantity;
+        $lot_numbers = $request->lot_numbers;
+
+        $storage = Storage::create([
+            'code' => $request->code,
+            'reception_id' => $request->reception_id
+        ]);
+
+        for ($i = 0; $i < sizeof($lot_numbers); $i++) {
+            $detail = StorageDetail::create([
+                'storage_id' => $storage->id,
+                'product_id' => $list_products[$i],
+                'lot_number' => $lot_numbers[$i],
+                'lot_price' => $lot_prices[$i],
+                'quantity' => $list_quantity[$i],
+                'location' => $this->alphaNumber($list_products[$i])
+            ]);
+            Product::find($list_products[$i])->update([
+                'stock' => (Product::find($list_products[$i])->stock) + $list_quantity[$i],
+                'unit_price' => ($lot_prices[$i] + ($lot_prices[$i] * 0.18)) / $list_quantity[$i]
+            ]);
+        }
+
+        $reception = Reception::find($request->reception_id);
+        Order::find($reception->order_id)->update([
+            'status' => "DISTRIBUIDO"
+        ]);
+
+        return redirect()->route('home');
+    }
+
+    private function alphaNumber($id)
+    {
+        $product = Product::find($id);
+        $category_id = $product->product_categories->id;
+        $code = "";
+        $pasillo = 0;
+        $estanteria = "";
+        $estante = 0;
+        switch ($category_id) {
+            case 1:
+                $pasillo = 1;
+                $estanteria = "A";
+                $estante = random_int(1, 2);
+                break;
+            case 2:
+                $pasillo = 1;
+                $estanteria = "A";
+                $estante = random_int(3, 4);
+                break;
+            case 3:
+                $pasillo = 2;
+                $estanteria = "B";
+                $estante = random_int(1, 2);
+                break;
+            case 4:
+                $pasillo = 2;
+                $estanteria = "B";
+                $estante = random_int(3, 4);
+                break;
+            case 5:
+                $pasillo = 3;
+                $estanteria = "C";
+                $estante = random_int(1, 2);
+                break;
+            case 6:
+                $pasillo = 3;
+                $estanteria = "C";
+                $estante = random_int(3, 4);
+                break;
+            case 7:
+                $pasillo = 4;
+                $estanteria = "D";
+                $estante = random_int(1, 2);
+                break;
+            case 8:
+                $pasillo = 4;
+                $estanteria = "D";
+                $estante = random_int(3, 4);
+                break;
+            case 9:
+                $pasillo = 5;
+                $estanteria = "E";
+                $estante = random_int(1, 2);
+                break;
+
+            default:
+                # code...
+                break;
+        }
+
+        $category = $product->product_categories->category;
+        $nameProduct = $product->name;
+        $code = $category[0] . $category[1] . $category[2] . $nameProduct[0] . $nameProduct[1] . $nameProduct[2] . $pasillo . $estanteria . $estante;
+        return strtoupper($code);
+    }
+
+
+    public function OutputCreate(Request $request)
+    {
+        $list_products = $request->list_products;
+        $list_quantity = $request->list_quantity;
+        $date = date('Y-m-d');
+        $output = Output::create([
+            'date' => $date
+        ]);
+        for ($i = 0; $i < sizeof($list_products); $i++) {
+            OutputDetail::create([
+                'output_id' => $output->id,
+                'product_id' => $list_products[$i],
+                'quantity' => $list_quantity[$i]
+            ]);
+            Product::find($list_products[$i])->update([
+                'stock' => Product::find($list_products[$i])->stock - $list_quantity[$i]
+            ]);
+        }
+        return redirect()->route('home');
     }
 }
